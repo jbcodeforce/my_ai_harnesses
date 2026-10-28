@@ -9,16 +9,29 @@ dependencies = [
     "fastapi>=0.142.2",
     "greenlet>=3.5.6",
     "openai>=2.45.0",
+    "python-dotenv>=1.2.0",
     "python-multipart>=0.0.32",
+    "pyyaml>=6.0.3",
+    "rich>=13.0.0",
     "sqlalchemy>=2.1.3",
+    "typer>=0.12.0",
     "uvicorn>=0.54.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
 
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
 
 [project.scripts]
-db_review_agent = "agents.db_review"
+db-review-agent = "agents.db_review:main"
+book-sync = "cli.book_sync:main"
+book-sync-agent = "agents.book_sync:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["agents*"]
+include = ["agents*", "core*", "cli*"]

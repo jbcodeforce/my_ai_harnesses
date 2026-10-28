@@ -3,6 +3,7 @@
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+
 load_dotenv()
 
 CODE_ROOT = Path(__file__).resolve().parent
@@ -22,3 +23,11 @@ DEFAULT_LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.4"))
 DEFAULT_LLM_API_KEY = os.getenv("LLM_API_KEY", "local-key")
 EMBEDDER_MODEL = os.getenv("EMBEDDER_MODEL")       # optional -> enables KB
 EMBEDDER_BASE_URL = os.getenv("EMBEDDER_BASE_URL", DEFAULT_LLM_BASE_URL)
+
+# Per-agent database URL. Set DB_REVIEW_URL to a SQLAlchemy URL such as
+# "sqlite:////abs/path/to/file.db" or "postgresql://user:pw@host/db".
+DB_REVIEW_URL = os.getenv("DB_REVIEW_URL")
+
+
+class NotConfigured(Exception):
+    """Raised when a required environment variable is not set."""
